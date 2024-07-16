@@ -1,0 +1,23 @@
+{
+  "name": "blueflix",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "devDependencies": {
+    "vite": "^5.3.4"
+  },
+  "dependencies": {
+    "@fortawesome/fontawesome-svg-core": "^6.6.0",
+    "@fortawesome/free-solid-svg-icons": "^6.6.0",
+    "@fortawesome/react-fontawesome": "^0.2.2",
+    "@vitejs/plugin-react": "^4.3.1",
+    "axios": "^1.7.2",
+    "react-router-dom": "^6.25.0",
+    "styled-components": "^6.1.11"
+  }
+}
