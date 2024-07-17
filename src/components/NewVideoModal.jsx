@@ -25,6 +25,7 @@ const ModalContent = styled.div`
   width: 50%;
   max-width: 600px;
   position: relative;
+  border: 2px solid #6bd1ff; /* Borda adicionada */
 `;
 
 const CloseButton = styled.button`
@@ -117,35 +118,30 @@ const NewVideoModal = ({ isOpen, onClose, video, onSave }) => {
       setVideoName(video.name);
       setDescription(video.description);
       setCategory(video.category);
+    } else {
+      setVideoUrl("");
+      setThumbnailUrl("");
+      setVideoName("");
+      setDescription("");
+      setCategory("Front End");
     }
   }, [video]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newVideo = {
-      id: video ? video.id : Date.now(),
       url: videoUrl,
       thumbnail: thumbnailUrl,
       name: videoName,
       description,
       category,
     };
-
     if (video) {
-      onSave(newVideo);
+      onSave({ ...newVideo, id: video.id });
     } else {
       addVideo(newVideo);
     }
-
     onClose();
-  };
-
-  const handleReset = () => {
-    setVideoUrl("");
-    setThumbnailUrl("");
-    setVideoName("");
-    setDescription("");
-    setCategory("Front End");
   };
 
   if (!isOpen) return null;
@@ -158,7 +154,7 @@ const NewVideoModal = ({ isOpen, onClose, video, onSave }) => {
         </CloseButton>
         <FormTitle>{video ? "Editar Vídeo" : "Novo Vídeo"}</FormTitle>
         <FormSubtitle>
-          COMPLETE O FORMULÁRIO PARA {video ? "EDITAR" : "CRIAR"} UM NOVO CARD
+          COMPLETE O FORMULÁRIO PARA {video ? "EDITAR O" : "CRIAR UM NOVO"} CARD
           DE VÍDEO.
         </FormSubtitle>
         <form onSubmit={handleSubmit}>
@@ -220,10 +216,10 @@ const NewVideoModal = ({ isOpen, onClose, video, onSave }) => {
           </FormField>
           <ButtonContainer>
             <Button type="submit" primary>
-              {video ? "Salvar Alterações" : "Guardar"}
+              {video ? "Salvar" : "Guardar"}
             </Button>
-            <Button type="button" onClick={handleReset}>
-              Limpar
+            <Button type="button" onClick={onClose}>
+              Cancelar
             </Button>
           </ButtonContainer>
         </form>
